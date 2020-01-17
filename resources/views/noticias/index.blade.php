@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{$noticia->titulo}}</td>
                     <td>
-                        <button>Ver mas</button>
+                        <a href="{{route('noticias.show',$noticia->id)}}">Ver mas</a>
                     </td>
                 </tr>
             @endforeach
