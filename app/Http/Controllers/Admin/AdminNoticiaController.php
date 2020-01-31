@@ -9,6 +9,10 @@ use App\Noticia;
 
 class AdminNoticiaController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +35,7 @@ class AdminNoticiaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.noticias.create');
     }
 
     /**
@@ -42,7 +46,21 @@ class AdminNoticiaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $noticia = new Noticia();
+
+        $noticia->titulo = $request->input('txtTitulo');
+        $noticia->cuerpo = $request->input('txtCuerpo');
+
+        if($noticia->save()) {
+            //Si se pudo, si se pudo
+            return redirect()->
+                route('noticias.index')->
+                with('exito','La noticia fue guardada correctamente');
+        }
+
+        // mi loco dele pa fuera
+        return redirect()->route('noticias.index')->
+            with('error','No se pudo guardar la noticia mi loco');
     }
 
     /**
@@ -64,7 +82,12 @@ class AdminNoticiaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $noticia = Noticia::find($id);
+
+        $argumentos= array();
+        $argumentos['noticia'] = $noticia;
+        
+        return view('admin.noticias.edit', $argumentos);
     }
 
     /**
