@@ -52,23 +52,58 @@
                                 <tr>
                                     <td>{{ $noticia->titulo }}</td>
                                     <td>
-                                        <button class="btn btn-primary">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
 
-                                        <a href="{{ route('noticias.edit', $noticia->id) }}" class="btn btn-primary">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
+                                        <form method="POST" action="">
 
-                                        <button class="btn btn-danger">
-                                            <i class="fas fa-times"></i>
-                                        </button>
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <a href="{{ route('noticias.show', $noticia->id) }}" class="btn btn-primary">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+
+                                            <a href="{{ route('noticias.edit', $noticia->id) }}" class="btn btn-primary">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal-danger">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+
+                                            <div class="modal fade" id="modal-danger">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content bg-danger">
+                                                        <div class="modal-header">
+                                                        <h4 class="modal-title">Danger Modal</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        <p>One fine body&hellip;</p>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+
+                                                        <!-- {{route('noticias.destroy', $noticia->id) }} -->
+                                                        <button type="submit" href="{{route('noticias.destroy', $noticia->id) }}" class="btn btn-outline-light">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.modal-content -->
+                                                </div>
+                                                <!-- /.modal-dialog -->
+                                            </div>
+                                            <!-- /.modal -->
+
+                                        </form>
+
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>
@@ -79,4 +114,9 @@
 @section('estilos')
 @endsection
 @section('scripts')
+<script>
+    function eliminarClick(del) {
+
+    }
+</script>
 @endsection

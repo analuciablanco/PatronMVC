@@ -71,7 +71,18 @@ class AdminNoticiaController extends Controller
      */
     public function show($id)
     {
-        //
+        $noticia = Noticia::find($id);
+
+        if($noticia) {
+            $argumentos= array();
+            $argumentos['noticia'] = $noticia;
+            
+            return view('admin.noticias.show', $argumentos);
+        }
+
+        return redirect()-> 
+            route('noticias.index')-> 
+            with('error', 'No se econtró la noticia');
     }
 
     /**
@@ -84,10 +95,16 @@ class AdminNoticiaController extends Controller
     {
         $noticia = Noticia::find($id);
 
-        $argumentos= array();
-        $argumentos['noticia'] = $noticia;
-        
-        return view('admin.noticias.edit', $argumentos);
+        if($noticia) {
+            $argumentos= array();
+            $argumentos['noticia'] = $noticia;
+            
+            return view('admin.noticias.edit', $argumentos);
+        }
+
+        return redirect()-> 
+            route('noticias.index')-> 
+            with('error', 'No se econtró la noticia');
     }
 
     /**
@@ -99,7 +116,26 @@ class AdminNoticiaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $noticia = Noticia::find($id);
+
+        if($noticia) {
+            $noticia->titulo = $request->input('txtTitulo');
+            $noticia->cuerpo = $request->input('txtCuerpo');
+
+            if($noticia->save()) {
+                return redirect()->
+                    route('noticias.edit', $id)->
+                    with('exito', 'La noticia se actualizó exitosamente');
+            }
+
+            return redirect()->
+                    route('noticias.edit', $id)->
+                    with('error', 'No se pudo actualizar la noticia');
+        }
+
+        return redirect()->
+            route('noticias.index')->
+            with('error', 'No se econtró la noticia');
     }
 
     /**
@@ -110,6 +146,22 @@ class AdminNoticiaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $noticia = Noticia::find($id);
+
+        /* if($noticia) {
+            if($noticia->delete()) {
+                return redirect()->
+                    route('noticias.index', $id)->
+                    with('exito', 'La noticia se eliminó exitosamente');
+            }
+
+            return redirect()->
+                    route('noticias.index', $id)->
+                    with('error', 'No se pudo eliminar la noticia');
+        }
+
+        return redirect()->
+            route('noticias.index')->
+            with('error', 'No se pudo eliminar la noticia'); */
     }
 }

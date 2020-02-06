@@ -9,6 +9,13 @@
 @section('contenido')
 <p>Hola papá</p>
 
+<a class="btn btn-primary btn-sm" 
+    style="margin-left: 8px; margin-bottom: 15px;" 
+    href="{{ route('noticias.index') }}">
+    
+    <i class="fas fa-arrow-left"></i> 
+    Volver a lista de noticias</a>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
