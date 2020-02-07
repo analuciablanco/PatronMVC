@@ -23,5 +23,6 @@ Route::get('/admin', 'AdminController@dashboard')->name('admin.dashboard');
 // atajo para establecer las 7 rutas básicas de un recurso.
 // index, create, store, show, edit, update, destroy.
 Route::resource('admin/noticias','Admin\AdminNoticiaController');
+Route::resource('admin/usuarios','Admin\AdminUsuarioController');
 
 Auth::routes(['register' => false]);

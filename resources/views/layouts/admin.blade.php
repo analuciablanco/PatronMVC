@@ -89,6 +89,7 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Noticias Menu -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -112,6 +113,33 @@
               </li>
             </ul>
           </li>
+          <!-- Noticias Menu -->
+
+          <!-- Usuarios Menu -->
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Usuarios
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('usuarios.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de usuarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('usuarios.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Nuevo usuario</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- Usuarios Menu -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
