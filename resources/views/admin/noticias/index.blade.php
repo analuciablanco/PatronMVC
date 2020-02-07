@@ -52,50 +52,18 @@
                                 <tr>
                                     <td>{{ $noticia->titulo }}</td>
                                     <td>
+                                        <a href="{{ route('noticias.show', $noticia->id) }}" class="btn btn-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
 
-                                        <form method="POST" action="">
+                                        <a href="{{ route('noticias.edit', $noticia->id) }}" class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
 
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <a href="{{ route('noticias.show', $noticia->id) }}" class="btn btn-primary">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-
-                                            <a href="{{ route('noticias.edit', $noticia->id) }}" class="btn btn-primary">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal-danger">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-
-                                            <div class="modal fade" id="modal-danger">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content bg-danger">
-                                                        <div class="modal-header">
-                                                        <h4 class="modal-title">Danger Modal</h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                        <p>One fine body&hellip;</p>
-                                                        </div>
-                                                        <div class="modal-footer justify-content-between">
-                                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-
-                                                        <!-- {{route('noticias.destroy', $noticia->id) }} -->
-                                                        <button type="submit" href="{{route('noticias.destroy', $noticia->id) }}" class="btn btn-outline-light">Save changes</button>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.modal-content -->
-                                                </div>
-                                                <!-- /.modal-dialog -->
-                                            </div>
-                                            <!-- /.modal -->
-
-                                        </form>
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$noticia->id}})" 
+                                            data-target="#DeleteModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
 
                                     </td>
                                 </tr>
@@ -109,14 +77,51 @@
     </div>
 </div>
 
+<div class="modal fade" id="DeleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="" id="deleteForm" method="post">
+                <div class="modal-header">
+                    <h4 class="modal-title">Eliminar Noticia</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    @csrf
+                    @method('DELETE')
+                    <p class="text-center">¿Seguro que quieres eliminar la noticia: <b>"{{ $noticia->titulo }}"?</b></p>
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Sí, eliminar</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 @endsection
 
 @section('estilos')
 @endsection
 @section('scripts')
-<script>
-    function eliminarClick(del) {
-
+<script type="text/javascript">
+    function deleteData(id)
+    {
+        var id = id;
+        var url = '{{ route("noticias.destroy", ":id") }}';
+        url = url.replace(':id', id);
+        $("#deleteForm").attr('action', url);
     }
-</script>
+    function formSubmit()
+    {
+        $("#deleteForm").submit();
+    }
+ </script>
 @endsection

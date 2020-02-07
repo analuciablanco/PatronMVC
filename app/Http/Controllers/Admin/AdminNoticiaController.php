@@ -148,7 +148,7 @@ class AdminNoticiaController extends Controller
     {
         $noticia = Noticia::find($id);
 
-        /* if($noticia) {
+        if($noticia) {
             if($noticia->delete()) {
                 return redirect()->
                     route('noticias.index', $id)->
@@ -162,6 +162,6 @@ class AdminNoticiaController extends Controller
 
         return redirect()->
             route('noticias.index')->
-            with('error', 'No se pudo eliminar la noticia'); */
+            with('error', 'No se pudo eliminar la noticia');
     }
 }
