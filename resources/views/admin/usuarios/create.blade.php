@@ -39,7 +39,12 @@
 
                         <div class="form-group">
                             <label>Contraseña</label>
-                            <input type="text" name="txtPassword" class="form-control"/>
+                            <input id="password" type="password" name="txtPassword" class="form-control"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input id="confirm_password" type="password" name="txtPassword" class="form-control"/>
                         </div>
 
                         <div class="form-group"> 
@@ -57,4 +62,21 @@
 @section('estilos')
 @endsection
 @section('scripts')
+<script type="text/javascript">
+    var password = document.getElementById("password")
+    , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword(){
+    if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Las contraseñas no coinciden.");
+    } else {
+        confirm_password.setCustomValidity('');
+    }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+ </script>
+
+    
 @endsection

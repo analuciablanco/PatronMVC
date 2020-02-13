@@ -34,7 +34,7 @@ class AdminUsuarioController extends Controller
 
         $usuario->name = $request->input('txtName');
         $usuario->email = $request->input('txtEmail');
-        $usuario->password = $request->input('txtPassword');
+        $usuario->password = bcrypt($request->input('txtPassword'));
 
         if($usuario->save()) {
             //Si se pudo, si se pudo
@@ -85,8 +85,9 @@ class AdminUsuarioController extends Controller
         $usuario = Usuario::find($id);
 
         if($usuario) {
-            $usuario->titulo = $request->input('txtTitulo');
-            $usuario->cuerpo = $request->input('txtCuerpo');
+            $usuario->name = $request->input('txtName');
+            $usuario->email = $request->input('txtEmail');
+            $usuario->password = bcrypt($request->input('txtPassword'));
 
             if($usuario->save()) {
                 return redirect()->

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('titulo', 'Administración | Editar noticia')
-@section('titulo2', 'Noticias')
+@section('titulo', 'Administración | Editar usuario')
+@section('titulo2', 'Usuarios')
 
 @section('breadcrumbs')
 @endsection
@@ -11,10 +11,10 @@
 
 <a class="btn btn-primary btn-sm" 
     style="margin-left: 8px; margin-bottom: 15px;" 
-    href="{{ route('noticias.index') }}">
+    href="{{ route('usuarios.index') }}">
     
     <i class="fas fa-arrow-left"></i> 
-    Volver a lista de noticias</a>
+    Volver a lista de usuarios</a>
 
 <div class="container-fluid">
     <div class="row">
@@ -38,29 +38,39 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Editar noticia: {{ $noticia->id }}</h3>
+                    <h3 class="card-title">Editar usuario: {{ $usuario->id }}</h3>
                 </div>
                 <div class="card-body">
 
-                    <form method="POST" action="{{ route('noticias.update', $noticia->id) }}">
+                    <form method="POST" action="{{ route('usuarios.update', $usuario->id) }}">
 
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label>Titulo</label>
-                            <input type="text" name="txtTitulo" value="{{ $noticia->titulo }}" class="form-control" />
+                            <label>Nombre</label>
+                            <input type="text" value="{{ $usuario->name }}" name="txtName" class="form-control"/>
                         </div>
 
                         <div class="form-group">
-                            <label>Cuerpo</label>
-                            <textarea name="txtCuerpo" id="" cols="30" rows="10" class="form-control">{{ $noticia->cuerpo }}</textarea>
+                            <label>Correo</label>
+                            <input type="text" value="{{ $usuario->email }}" name="txtEmail" class="form-control" readonly/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input id="password" type="password" name="txtPassword" class="form-control"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input id="confirm_password" type="password" name="txtPassword" class="form-control"/>
                         </div>
 
                         <div class="form-group"> 
-                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>
-                    
+
                 </div>
             </div>
         </div>
