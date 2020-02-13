@@ -30,6 +30,16 @@ class AdminUsuarioController extends Controller
 
     public function store(Request $request)
     {
+        // where(columna, valor)
+        //first ecuetra el primer registro que coincida, si no encuentra regresa NULL
+        $verification = Usuario::where('email', $request->input('txtEmail'))->first();
+
+        if($verification) {
+            return redirect()->
+                route('usuarios.create')->
+                with('error','el correo ya existe mi loco');
+        }
+
         $usuario = new Usuario();
 
         $usuario->name = $request->input('txtName');
@@ -45,7 +55,7 @@ class AdminUsuarioController extends Controller
 
         // mi loco dele pa fuera
         return redirect()->route('usuarios.index')->
-            with('error','No se pudo guardar el usuario mi loco');
+            with('error','No se pudo guardar el usuario mi loco');           
     }
 
     public function show($id)
