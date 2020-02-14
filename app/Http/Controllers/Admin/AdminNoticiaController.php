@@ -51,6 +51,12 @@ class AdminNoticiaController extends Controller
         $noticia->titulo = $request->input('txtTitulo');
         $noticia->cuerpo = $request->input('txtCuerpo');
 
+        if($request->hasFile('imgPortada')) {
+            $archivoPortada = $request->file('imgPortada');
+            $rutaArchivo = $archivoPortada->store('portadas');
+            $noticia->portada = $rutaArchivo;
+        }
+
         if($noticia->save()) {
             //Si se pudo, si se pudo
             return redirect()->

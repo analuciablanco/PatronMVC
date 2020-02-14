@@ -7,7 +7,6 @@
 @endsection
 
 @section('contenido')
-<p>Hola hermano 1</p>
 
 <a class="btn btn-primary btn-sm" 
     style="margin-left: 8px; margin-bottom: 15px;" 
@@ -58,12 +57,12 @@
 
                         <div class="form-group">
                             <label>Contraseña</label>
-                            <input id="password" type="password" name="txtPassword" class="form-control"/>
+                            <input id="password" value="{{ $usuario->password }}" type="password" name="txtPassword" class="form-control"/>
                         </div>
 
                         <div class="form-group">
                             <label>Contraseña</label>
-                            <input id="confirm_password" type="password" name="txtPassword" class="form-control"/>
+                            <input id="confirm_password" value="{{ $usuario->password }}" type="password" name="txtPassword" class="form-control"/>
                         </div>
 
                         <div class="form-group"> 
